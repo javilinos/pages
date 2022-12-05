@@ -3,7 +3,7 @@
 # set -x
 set -e
 
-repo_dir=$GITHUB_WORKSPACE/$INPUT_REPOSITORY_PATH
+repo_dir=$GITHUB_WORKSPACE/main/$INPUT_REPOSITORY_PATH
 doc_dir=$repo_dir/$INPUT_DOCUMENTATION_PATH
 
 echo ::group:: Initialize various paths
