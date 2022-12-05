@@ -10,6 +10,7 @@ echo ::group:: Initialize various paths
 echo Workspace: $GITHUB_WORKSPACE
 echo Repository: $repo_dir
 echo Documentation: $doc_dir
+ls $GITHUB_WORKSPACE
 echo ::endgroup::
 
 # The actions doesn't depends on any images,
