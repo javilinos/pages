@@ -46,7 +46,7 @@ if [ ! -z "$INPUT_REQUIREMENTS_PATH" ] ; then
     echo ::endgroup::
 fi
 
-apt-get install rsync
+apt install rsync
 
 rsync -a --exclude='.*' python_interface $doc_dir/_user
 
