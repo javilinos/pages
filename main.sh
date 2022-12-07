@@ -19,9 +19,9 @@ echo ::group:: Installing Sphinx
 
 echo Installing sphinx via pip
 if [ -z "$INPUT_SPHINX_VERSION" ] ; then
-    pip3 install -U sphinx
+    python3 -m pip install -U sphinx
 else
-    pip3 install -U sphinx==$INPUT_SPHINX_VERSION
+    python3 -m pip install -U sphinx==$INPUT_SPHINX_VERSION
 fi
 
 echo Adding user bin to system path
