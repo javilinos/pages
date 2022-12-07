@@ -48,6 +48,8 @@ fi
 
 cp -r python_interface/ $doc_dir/_user/
 
+python3 $doc_dir/_user/python_interface/setup.py
+
 sphinx-apidoc -o $doc_dir/_user/python_interface/docs/source $doc_dir/_user/python_interface/python_interface
 
 echo ::group:: Creating temp directory
