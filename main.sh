@@ -2,6 +2,7 @@
 
 # set -x
 set -e
+apt install rsync
 
 repo_dir=$GITHUB_WORKSPACE/main/$INPUT_REPOSITORY_PATH
 doc_dir=$repo_dir/$INPUT_DOCUMENTATION_PATH
@@ -45,8 +46,6 @@ if [ ! -z "$INPUT_REQUIREMENTS_PATH" ] ; then
     fi
     echo ::endgroup::
 fi
-
-apt install rsync
 
 rsync -a --exclude='.*' python_interface $doc_dir/_user
 
