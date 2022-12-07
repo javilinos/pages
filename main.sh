@@ -34,7 +34,7 @@ else
 fi
 
 ls /usr/bin/python*
-ls /opt/ros/humble/lib
+ls /opt/ros/humble/lib/python3.10/site-packages
 
 echo ::endgroup::
 
