@@ -10,7 +10,6 @@ echo ::group:: Initialize various paths
 echo Workspace: $GITHUB_WORKSPACE
 echo Repository: $repo_dir
 echo Documentation: $doc_dir
-ls $GITHUB_WORKSPACE/python_interface
 echo ::endgroup::
 
 # The actions doesn't depends on any images,
@@ -32,9 +31,6 @@ if ! command -v sphinx-build &>/dev/null; then
 else
     echo Everything goes well
 fi
-
-ls /usr/bin/python*
-ls /opt/ros/humble/lib/python3.10/site-packages
 
 echo ::endgroup::
 
