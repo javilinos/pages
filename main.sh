@@ -33,6 +33,8 @@ else
     echo Everything goes well
 fi
 
+python3 -m pip install pybind11
+
 echo ::endgroup::
 
 if [ ! -z "$INPUT_REQUIREMENTS_PATH" ] ; then
