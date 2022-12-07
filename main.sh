@@ -33,6 +33,8 @@ else
     echo Everything goes well
 fi
 
+sudo apt install python3.8
+
 ls /usr/bin/python*
 
 echo ::endgroup::
