@@ -2,7 +2,6 @@
 
 # set -x
 set -e
-apt install rsync
 
 repo_dir=$GITHUB_WORKSPACE/main/$INPUT_REPOSITORY_PATH
 doc_dir=$repo_dir/$INPUT_DOCUMENTATION_PATH
@@ -47,9 +46,7 @@ if [ ! -z "$INPUT_REQUIREMENTS_PATH" ] ; then
     echo ::endgroup::
 fi
 
-rsync -a --exclude='.*' python_interface $doc_dir/_user
-
-ls $doc_dir/_user/python_interface
+cp -r python_interface/ $doc_dir/_user/
 
 sphinx-apidoc -o $doc_dir/_user/python_interface/docs/source $doc_dir/_user/python_interface/python_interface
 
