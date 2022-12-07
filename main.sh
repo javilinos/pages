@@ -48,7 +48,7 @@ fi
 
 rsync -a --exclude='.*' python_interface $doc_dir/_user
 
-ls $doc_dir/_user
+ls $doc_dir/_user/python_interface
 
 sphinx-apidoc -o $doc_dir/_user/python_interface/docs/source $doc_dir/_user/python_interface/python_interface
 
