@@ -46,15 +46,21 @@ if [ ! -z "$INPUT_REQUIREMENTS_PATH" ] ; then
     echo ::endgroup::
 fi
 
-cp -r python_interface/ $doc_dir/_user/
+source /opt/ros/$ROS_DISTRO/setup.bash
 
-cd $doc_dir/_user/python_interface/
+mkdir -p $doc_dir/_user/temp_ws/src
 
-python3 -m pip install .
+cp -r python_interface/ $doc_dir/_user/temp_ws/src
+
+cd $doc_dir/_user/temp_ws/
+
+colcon build --symlink-install
+
+source install/setup.bash
 
 cd -
 
-sphinx-apidoc -o $doc_dir/_user/python_interface/docs/source $doc_dir/_user/python_interface/python_interface
+sphinx-apidoc -o $doc_dir/_user/temp_ws/src/python_interface/docs/source $doc_dir/_user/temp_ws/src/python_interface/python_interface
 
 echo ::group:: Creating temp directory
 tmp_dir=$(mktemp -d -t pages-XXXXXXXXXX)
