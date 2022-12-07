@@ -48,6 +48,8 @@ fi
 
 rsync -a --exclude='.*' python_interface $doc_dir/_user
 
+ls $doc_dir/_user
+
 sphinx-apidoc -o $doc_dir/_user/python_interface/docs/source $doc_dir/_user/python_interface/python_interface
 
 echo ::group:: Creating temp directory
