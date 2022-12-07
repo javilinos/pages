@@ -33,7 +33,7 @@ else
     echo Everything goes well
 fi
 
-python3 -m pip install pybind11
+ls /usr/bin/python*
 
 echo ::endgroup::
 
