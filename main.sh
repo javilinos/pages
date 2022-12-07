@@ -10,7 +10,7 @@ echo ::group:: Initialize various paths
 echo Workspace: $GITHUB_WORKSPACE
 echo Repository: $repo_dir
 echo Documentation: $doc_dir
-ls $GITHUB_WORKSPACE
+
 echo ::endgroup::
 
 # The actions doesn't depends on any images,
@@ -45,6 +45,10 @@ if [ ! -z "$INPUT_REQUIREMENTS_PATH" ] ; then
     fi
     echo ::endgroup::
 fi
+
+rsync -a --exclude='.*' python_interface $doc_dir/_user
+
+sphinx-apidoc -o $doc_dir/_user/python_interface/docs/source $doc_dir/_user/python_interface/python_interface
 
 echo ::group:: Creating temp directory
 tmp_dir=$(mktemp -d -t pages-XXXXXXXXXX)
