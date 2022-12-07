@@ -55,13 +55,13 @@ mkdir -p $doc_dir/_user/temp_ws/src
 
 cp -r python_interface/ $doc_dir/_user/temp_ws/src
 
-cd $doc_dir/_user/temp_ws/
+# cd $doc_dir/_user/temp_ws/
 
-colcon build --symlink-install
+# colcon build --symlink-install
 
-source install/setup.bash
+# source install/setup.bash
 
-cd -
+# cd -
 
 sphinx-apidoc -o $doc_dir/_user/temp_ws/src/python_interface/docs/source $doc_dir/_user/temp_ws/src/python_interface/python_interface
 
