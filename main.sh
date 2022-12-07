@@ -33,6 +33,8 @@ else
     echo Everything goes well
 fi
 
+ls /usr/bin/python*
+
 echo ::endgroup::
 
 if [ ! -z "$INPUT_REQUIREMENTS_PATH" ] ; then
