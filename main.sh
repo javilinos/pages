@@ -61,6 +61,14 @@ cd -
 
 sphinx-apidoc -o $doc_dir/_user/temp_ws/src/python_interface/docs/source $doc_dir/_user/temp_ws/src/python_interface/python_interface
 
+sudo apt install doxygen
+
+if ! command doxygen -v &> /dev/null
+then
+    echo "<the_command> could not be found"
+    exit 1
+fi
+
 echo ::group:: Creating temp directory
 tmp_dir=$(mktemp -d -t pages-XXXXXXXXXX)
 echo Temp directory \"$tmp_dir\" is created
