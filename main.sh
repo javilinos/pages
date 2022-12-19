@@ -4,6 +4,7 @@
 set -e
 
 repo_dir=$GITHUB_WORKSPACE/main/$INPUT_REPOSITORY_PATH
+as2_dir=$GITHUB_WORKSPACE/aerostack2/
 doc_dir=$repo_dir/$INPUT_DOCUMENTATION_PATH
 
 echo ::group:: Initialize various paths
@@ -51,15 +52,41 @@ then
     exit 1
 fi
 
-echo ::group:: Checking new List
+echo ::group:: Checking modules list
 if [ ! -z "$INPUT_AEROSTACK2_MODULES" ]; then 
-    echo $INPUT_AEROSTACK2_MODULES
     INPUT_AEROSTACK2_MODULES="$(echo "$INPUT_AEROSTACK2_MODULES" | sed 's/ //g')"
     echo $INPUT_AEROSTACK2_MODULES
     arrModules=(${INPUT_AEROSTACK2_MODULES//,/ })
-    echo ${arrModules[0]}
 fi
 echo ::endgroup::
+
+source /opt/ros/$ROS_DISTRO/setup.bash
+mkdir -p $doc_dir/_user/temp_ws/src # In case there is a python project to be built for autodoc to generate documentation
+
+shopt -s dotglob
+shopt -s nullglob
+
+for dir in "${arrModules[@]}"; do
+    if [[ -f ""$as2_dir""$dir"/setup.py" ]]; then # This is a python project    
+        echo ""$as2_dir""$dir"/ is a python project, performing compilation";
+        cp -r "$as2_dir""$dir"/ $doc_dir/_user/temp_ws/src
+        cd $doc_dir/_user/temp_ws/
+        colcon build --symlink-install
+        source install/setup.bash
+        cd -
+        sphinx-apidoc -o $doc_dir/_user/temp_ws/src/"$dir"/docs/source $doc_dir/_user/temp_ws/src/"$dir"/"$dir"
+
+    elif [[ -f ""$as2_dir""$dir"/doxygen.dox" ]]; then # This is a c++ project, no need to compile
+        echo ""$as2_dir""$dir" is a c++ project, performing doxygen build";
+        cp -r "$as2_dir""$dir"/ $doc_dir/_user
+        cd $doc_dir/_user/$dir
+        doxygen doxygen.dox
+        cd -
+    fi;
+    done
+
+shopt -u dotglob
+shopt -u nullglob
 
 echo ::group:: Creating temp directory
 tmp_dir=$(mktemp -d -t pages-XXXXXXXXXX)
