@@ -68,7 +68,7 @@ shopt -s dotglob
 shopt -s nullglob
 
 echo ::group:: Organizing workspace
-for dir in `find . -maxdepth 1 -type d -name "${arrModules[@]}"`; do
+for dir in `find "$GITHUB_WORKSPACE" -maxdepth 1 -type d -name "${arrModules[@]}"`; do
     echo $dir
     if [[ -f "$dir/setup.py" ]]; then # This is a python project    
         echo "$dir is a python project, performing compilation";
