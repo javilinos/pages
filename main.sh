@@ -52,14 +52,12 @@ then
 fi
 
 echo ::group:: Checking new List
-
 if [ ! -z "$INPUT_AEROSTACK2_MODULES" ]; then 
     echo $INPUT_AEROSTACK2_MODULES
     INPUT_AEROSTACK2_MODULES = $INPUT_AEROSTACK2_MODULES | sed 's/ //g'
     echo $INPUT_AEROSTACK2_MODULES
     arrModules=(${INPUT_AEROSTACK2_MODULES//,/ })
     echo ${arrModules[0]}
-
 echo ::endgroup::
 
 echo ::group:: Creating temp directory
