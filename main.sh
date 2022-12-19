@@ -66,24 +66,28 @@ mkdir -p $doc_dir/_user/temp_ws/src # In case there is a python project to be bu
 shopt -s dotglob
 shopt -s nullglob
 
+echo ::group:: Organizing workspace
 for dir in "${arrModules[@]}"; do
-    if [[ -f ""$as2_dir""$dir"/setup.py" ]]; then # This is a python project    
-        echo ""$as2_dir""$dir"/ is a python project, performing compilation";
-        cp -r "$as2_dir""$dir"/ $doc_dir/_user/temp_ws/src
+    module_dir=find $GITHUB_WORKSPACE -type d -name "$dir"
+    echo $module_dir
+    if [[ -f ""$module_dir"/setup.py" ]]; then # This is a python project    
+        echo ""$module_dir"/ is a python project, performing compilation";
+        cp -r "$module_dir"/ $doc_dir/_user/temp_ws/src
         cd $doc_dir/_user/temp_ws/
         colcon build --symlink-install
         source install/setup.bash
         cd -
         sphinx-apidoc -o $doc_dir/_user/temp_ws/src/"$dir"/docs/source $doc_dir/_user/temp_ws/src/"$dir"/"$dir"
 
-    elif [[ -f ""$as2_dir""$dir"/doxygen.dox" ]]; then # This is a c++ project, no need to compile
-        echo ""$as2_dir""$dir" is a c++ project, performing doxygen build";
-        cp -r "$as2_dir""$dir"/ $doc_dir/_user
+    elif [[ -f ""$module_dir"/doxygen.dox" ]]; then # This is a c++ project, no need to compile
+        echo ""$module_dir"/ is a c++ project, performing doxygen build";
+        cp -r "$module_dir" $doc_dir/_user
         cd $doc_dir/_user/$dir
         doxygen doxygen.dox
         cd -
     fi;
     done
+echo ::endgroup::
 
 shopt -u dotglob
 shopt -u nullglob
