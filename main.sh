@@ -58,6 +58,7 @@ if [ ! -z "$INPUT_AEROSTACK2_MODULES" ]; then
     echo $INPUT_AEROSTACK2_MODULES
     arrModules=(${INPUT_AEROSTACK2_MODULES//,/ })
     echo ${arrModules[0]}
+fi
 echo ::endgroup::
 
 echo ::group:: Creating temp directory
