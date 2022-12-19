@@ -67,6 +67,7 @@ mkdir -p $doc_dir/_user/temp_ws/src # In case there is a python project to be bu
 shopt -s dotglob
 shopt -s nullglob
 
+echo ::group:: Organizing workspace
 for dir in `find . -maxdepth 1 -type d -name "${arrModules[@]}"`; do
     echo $dir
     if [[ -f "$dir/setup.py" ]]; then # This is a python project    
@@ -86,6 +87,7 @@ for dir in `find . -maxdepth 1 -type d -name "${arrModules[@]}"`; do
         cd -
     fi;
     done
+echo ::endgroup::
 
 shopt -u dotglob
 shopt -u nullglob
