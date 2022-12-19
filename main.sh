@@ -45,27 +45,18 @@ if [ ! -z "$INPUT_REQUIREMENTS_PATH" ] ; then
     echo ::endgroup::
 fi
 
-source /opt/ros/$ROS_DISTRO/setup.bash
-
-mkdir -p $doc_dir/_user/temp_ws/src
-
-cp -r python_interface/ $doc_dir/_user/temp_ws/src
-
-cd $doc_dir/_user/temp_ws/
-
-colcon build --symlink-install
-
-source install/setup.bash
-
-cd -
-
-sphinx-apidoc -o $doc_dir/_user/temp_ws/src/python_interface/docs/source $doc_dir/_user/temp_ws/src/python_interface/python_interface
-
 if ! command doxygen -v &> /dev/null
 then
     echo "<the_command> could not be found"
     exit 1
 fi
+
+echo ::group:: Checking new List
+
+if [ ! -z "$INPUT_AEROSTACK2_MODULES" ]; then 
+    echo $INPUT_AEROSTACK2_MODULES
+
+echo ::endgroup::
 
 echo ::group:: Creating temp directory
 tmp_dir=$(mktemp -d -t pages-XXXXXXXXXX)
